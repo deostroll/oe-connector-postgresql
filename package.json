@@ -9,9 +9,9 @@
     "test": "mocha -R spec --timeout 10000 --require test/init.js test/*.test.js"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "pg": "^6.0.0",
-    "uuid": "^3.1.0"
+    "bluebird": "3.5.3",
+    "pg": "6.4.2",
+    "uuid": "3.3.2"
   },
   "description": "The modified postgresql connector for the LoopBack framework - customization done for oe-cloud.",
   "devDependencies": {

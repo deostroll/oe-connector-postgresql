@@ -16,10 +16,7 @@
   "description": "The modified postgresql connector for the LoopBack framework - customization done for oe-cloud.",
   "devDependencies": {
     "eslint": "4.10.0",
-    "mocha": "5.2.0",
-    "rc": "1.2.8",
-    "should": "8.0.2",
-    "sinon": "1.15.4"
+    "mocha": "5.2.0"
   },
   "optionalDependencies": {},
   "directories": {},

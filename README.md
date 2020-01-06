@@ -8,7 +8,7 @@ Original loopback connector for PostgreSQL is maintained at [Github Location](ht
 ## Getting Started
 In your application root directory, enter this command to install the connector:
 ```javascript
-$ npm install loopback-connector-postgresql --save
+$ npm install oe-connector-postgresql --save
 ```
 This will install the module from npm and add it as a dependency to the application’s package.json file.
 

@@ -8,7 +8,7 @@ describe('Auto-create schema with sequence support', function() {
     db.define('TestSchema', {      
       reservationId: {
         type: 'number',
-        postgres: {
+        postgresql: {
           sequence: {
             type: 'standard',
             bigSerial: false
@@ -25,7 +25,7 @@ describe('Auto-create schema with sequence support', function() {
     db.define('TestSchema2', {
       reservationId: {
         type: 'number',
-        postgres: {
+        postgresql: {
           sequence: {
             type: 'simple',
             name: 'reservation_sequence'
@@ -41,7 +41,7 @@ describe('Auto-create schema with sequence support', function() {
     db.define('TestSchema3', {
       reservationId : {
         type: 'string',
-        postgres: {
+        postgresql: {
           sequence: {
             type: 'complex',
             prefix: 'LMB',

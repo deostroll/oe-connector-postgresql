@@ -3,10 +3,8 @@
   "version": "2.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
-    "posttest": "npm run lint",
-    "pretest": "node pretest.js",
-    "test": "mocha -R spec --timeout 10000 --require test/init.js test/*.test.js"
+    "lint": "eslint .",    
+    "test": "mocha -R spec --timeout 10000000 --exit --require test/init.js test/*test.js"
   },
   "dependencies": {
     "bluebird": "3.5.3",

@@ -1,7 +1,7 @@
-## loopback-connector-postgresql
+## oe-connector-postgresql
 
 This is modified version of loopback-connector-postgresql which is loopback compliant connector for PostgreSQL.
-This version is named as loopback-connector-postgresql and is maintained at [evgit location](http://evgit/oecloud.io/loopback-connector-postgresql)
+This version is named as oe-connector-postgresql and is maintained at [evgit location](http://evgit/oecloud.io/oe-connector-postgresql)
 Original loopback connector for PostgreSQL is maintained at [Github Location](http://docs.strongloop.com/display/LB/PostgreSQL+connector).
 
 
@@ -302,3 +302,124 @@ not delete difference columns of the particular version.
 
 If there is a requirement to disable this functionality, disable it by using the property `'dropUnusedColumns'`
 setting it to true.
+
+## Sequences
+
+This connector supports the creation of sequences in the database. Sequences in postgres can be implicitly defined using the SERIAL or BIGSERIAL postgres datatypes, or, they can be created independently whereby it can be consumed by various database objects. This connector supports both flavours.
+
+This connector supports three different types of sequences.
+
+1. Standard Sequence
+2. Simple Sequence
+3. Complex Sequence
+
+#### General note
+
+Only properties which are meant to be an instance's unique identifier can be defined as a sequence field. This is due to a limitation in the datasource juggler. Hence in the property definition they must be defined as `"id": true`. 
+
+Refer example below.
+
+### Standard sequence
+
+This is the traditional flavor of SERIAL or BIGSERIAL. During automigrate the create scripts for a table are generated with this as the datatype against the corresponding column. Postgres automatically generates a sequence object and associates with the table column.
+
+To specify sequence field:
+
+```
+"properties" : {
+    "customerId": {
+        "type": "number",
+        "postgresql" : {
+            "sequence" : {
+                "type" : "standard",
+                "bigSerial": false
+            }
+        },
+        "id": true
+    },
+    "name" : "string"
+}
+```
+
+> **Note**: This generates the following create script during automigrate.
+> ```
+> create table foo (
+>     customerid SERIAL,
+>     name VARCHAR
+> )
+> ```
+
+### Simple Sequence
+
+This generates a sequence object and associates with the corresponding table field in the database. The sequence object can later be associated with other tables in the database if required. Therefore most features of a typical postgres sequence is supported. For more information about postgres sequence objects and how they can be created please refer postgres documentation.
+
+Below are properties meant to define a postgres simple sequence.
+
+```JSON
+{
+  "name": "seq_name", // sequence name - required
+  "incrementBy": 1,
+  "minValue": false,  // number or boolean
+  "maxValue": false,  // number or boolean
+  "startFrom": 1,     // number
+  "cache": 1,         // no. of sequences to cache, boolean (false) or a number. 1 is no cache. Min value - 1
+  "cycle": false,     // restart once the seq reaches its upper bound.
+}
+```
+
+E.g
+```JSON
+{
+    "name" : "reservation",
+    "properties" : {
+        "reservationId": {
+            "type": "number",
+            "postgresql": {
+                "sequence": {
+                    "type": "simple",
+                    "name": "reservation_sequence",
+                    "incrementBy": 3,
+                    "maxValue": 1999364,
+                    "cycle" : true,
+                    "startFrom": 10021
+                }
+            },
+            "id": true
+        },
+        "firstName": "string",
+        "lastName":"string"
+        }
+    }
+}
+
+```
+
+> **Note**: Other than the required fields other properties will takeup default values as indicated above.
+
+### Complex Sequence
+
+In many systems, for e.g. e-commerce applications, the order numbers may have a prefix followed by a defined sequence (with left zero-padding usually). This is supported via means of a complex sequence. It is an extension of a simple sequence. Only additional required parameters are `length`, `prefix`. These both properties determine the padding length.
+
+E.g.
+```json
+{
+    "name": "reservations",
+    "properties" : {
+    "reservationId" : {
+        "type": "string",
+        "postgresql": {
+          "sequence": {
+            "type": "complex",
+            "prefix": "LMB",
+            "name": "reservation_sequence",
+            "length": 10,
+          }
+        },
+        "id": true
+      },
+      "firstName": "string",
+      "lastName" : "string"
+    }
+}
+```
+> **Note**: Other than the required fields other properties will takeup default values as indicated in a simple sequence.

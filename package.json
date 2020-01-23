@@ -1,9 +1,9 @@
 {
   "name": "oe-connector-postgresql",
-  "version": "2.3.0",
+  "version": "2.2.0",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",    
+    "lint": "eslint .",
     "test": "mocha -R spec --timeout 10000000 --exit --require test/init.js test/*test.js"
   },
   "dependencies": {

@@ -1,12 +1,10 @@
 {
   "name": "oe-connector-postgresql",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "posttest": "npm run lint",
-    "pretest": "node pretest.js",
-    "test": "mocha -R spec --timeout 10000 --require test/init.js test/*.test.js"
+    "test": "mocha -R spec --timeout 10000000 --exit --require test/init.js test/*test.js"
   },
   "dependencies": {
     "bluebird": "3.5.3",
@@ -16,7 +14,10 @@
   "description": "The modified postgresql connector for the LoopBack framework - customization done for oe-cloud.",
   "devDependencies": {
     "eslint": "4.10.0",
-    "mocha": "5.2.0"
+    "loopback-datasource-juggler": "^3.0.0",
+    "mocha": "^7.0.0",
+    "rc": "^1.2.8",
+    "should": "^13.2.3"
   },
   "optionalDependencies": {},
   "directories": {},

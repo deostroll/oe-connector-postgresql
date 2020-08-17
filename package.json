@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "bluebird": "3.5.3",
-    "pg": "6.4.2",
+    "pg": "8.3.0",
     "uuid": "3.3.2"
   },
   "description": "The modified postgresql connector for the LoopBack framework - customization done for oe-cloud.",
